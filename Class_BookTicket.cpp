@@ -143,7 +143,6 @@ void BookTicket::menu()
         }
         catch (...)
         {
-
             getch();
             b = false;
         }
@@ -198,11 +197,9 @@ void BookTicket::menu()
                         break;
                     }
                 }
-                catch (char const *ch)
-                {
-                    cout << ch;
-                    cin.get();
-                    break;
+                catch(...){
+                    cout<<"universal2"<<endl;
+                    getch();
                 }
             } while (choice < 1 && choice > 3);
         }
@@ -262,14 +259,20 @@ void BookTicket::give_recommendations_list()
     string to;
     string bt;
     string lt;
+    string temp;
+    int i = 0;
     ifstream gin;
-    while (!fin.eof())
+    while (fin)
     {
         char ch;
         string from_ = "";
         string to_ = "";
+        // getline(fin,temp);
+        // istringstream is(temp);
+        fin.seekg(i*67,ios::beg);
         fin >> flight >> from_ >> to_ >> date >> bt >> lt;
-        fin.get(ch);
+         fin.get(ch);
+        //  fin.get(ch);
         time.push_back(make_tuple(bt, lt));
         for (auto it : from_)
         {
@@ -283,6 +286,7 @@ void BookTicket::give_recommendations_list()
                 break;
             to += it;
         }
+        
         if (from == source && to == destination)
         {
 
@@ -379,6 +383,9 @@ void BookTicket::give_recommendations_list()
             }
             gin.close();
         }
+        from.clear();
+        to.clear();
+        i++;
     }
     fin.close();
 
@@ -418,7 +425,6 @@ void BookTicket::give_recommendations_list()
                 cin >> choice;
                 try
                 {
-
                     Boardingclass(window[choice - 1], time[choice - 1], date);
                 }
                 catch (string s)
@@ -426,6 +432,11 @@ void BookTicket::give_recommendations_list()
                     cout<< s;
                     getch();
                 }
+                catch(const char*ch){
+                    cout<<ch<<endl;
+                    getch();
+                }
+                
                 break;
             }
         case 2:
@@ -456,11 +467,21 @@ void BookTicket::give_recommendations_list()
                     cout<< s;
                     getch();
                 }
+                catch(const char *ch){
+                    cout<<ch<<endl;
+                    getch();
+                }
+                catch(...){
+                    cout<<"universal"<<endl;
+                    getch();
+                }
+                
             }
         }
     }
     else
     {
+        cout<<"hi"<<endl<<getch();
         throw false;
     }
 }
@@ -469,7 +490,7 @@ void BookTicket::DisplayTicket()
     string TicketNumber;
     cout << "Enter Ticket Number" << endl;
     cin >> TicketNumber;
-    ifstream fout(TicketNumber + ".txt");
+    ifstream fout(TicketNumber + "_UserCopy.txt");
     if(!fout.is_open()){
         string s = "";
         s += "No Ticket with ID " +TicketNumber+" Has been issued\nPlease register to book Ticket";
@@ -522,7 +543,7 @@ void BookTicket::cancelticket()
         }
         int n = (TicketNumber[8] - '0') * 100 + (TicketNumber[9] - '0') * 10 + (TicketNumber[10] - '0');
         n += (TicketNumber[11] - '0') - 1;
-        fin.seekg((n - 1) * 8 + 6, ios::beg);
+        fin.seekp((n - 1) * 8 + 6, ios::beg);
         fin << "0";
         fin.close();
     }
