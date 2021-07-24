@@ -1,0 +1,10 @@
+sohansharma    
+Airline Company: AirIndia
+45             
+Boarding Date: 15:30
+EMAIL ID    :  sohan@gmail.com
+ETicketID    : AII001_E0013         
+Boarding Time: 17:00
+1234567897     
+Landing Time: 16:30
+Amount Paid:   1200.00Seat Number  : 001W

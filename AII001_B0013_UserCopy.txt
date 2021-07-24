@@ -1,0 +1,10 @@
+Name: Roha Kumar
+Airline Company: AirIndia
+age: 25        
+Boarding Date: 15:30
+EMAIL ID    :  email: rohan@gmail.com
+ETicketID    : AII001_B0013         
+Boarding Time: 15:00
+contact number: 1235467897
+Landing Time: 16:30
+Amount Paid:   1800.00Seat Number  : 001W
